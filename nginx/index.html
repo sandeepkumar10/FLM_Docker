@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RedBus · Andhra & Telangana routes</title>
+  <!-- Font Awesome (clean icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #f4f7fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    .app-container {
+      max-width: 1280px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 40px;
+      box-shadow: 0 25px 50px -8px rgba(0, 20, 30, 0.15);
+      overflow: hidden;
+      padding: 2rem 2.5rem 3rem;
+      transition: all 0.2s ease;
+    }
+
+    /* ===== HEADER ===== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #eef2f6;
+      margin-bottom: 2rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-icon {
+      background: #d32f2f;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      box-shadow: 0 6px 12px rgba(211, 47, 47, 0.25);
+    }
+
+    .brand-name {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #1e293b;
+    }
+    .brand-name span {
+      color: #d32f2f;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+    }
+
+    .nav-actions a {
+      text-decoration: none;
+      color: #1e293b;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-actions a i {
+      color: #d32f2f;
+    }
+    .nav-actions a:hover {
+      color: #d32f2f;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #d32f2f;
+      padding: 0.5rem 1.3rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #d32f2f;
+      transition: 0.2s;
+      cursor: default;
+    }
+    .btn-outline i {
+      margin-right: 6px;
+    }
+    .btn-outline:hover {
+      background: #d32f2f;
+      color: white;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      gap: 1.5rem;
+    }
+
+    .hero-text {
+      flex: 1 1 280px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #0b1a2e;
+      letter-spacing: -0.02em;
+    }
+    .hero-text h1 i {
+      color: #d32f2f;
+      font-size: 2.2rem;
+      margin-right: 8px;
+    }
+    .hero-text .highlight {
+      color: #d32f2f;
+      background: #ffe9e9;
+      padding: 0 0.4rem;
+      border-radius: 30px;
+      display: inline-block;
+    }
+    .hero-text p {
+      margin-top: 0.8rem;
+      color: #475569;
+      font-size: 1.1rem;
+      max-width: 400px;
+      line-height: 1.5;
+    }
+
+    .hero-illustration {
+      flex: 0 0 160px;
+      background: #f1f5f9;
+      border-radius: 80px 20px 80px 20px;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .hero-illustration i {
+      font-size: 2.6rem;
+      color: #d32f2f;
+      background: white;
+      padding: 12px;
+      border-radius: 50%;
+      box-shadow: 0 6px 14px rgba(211,47,47,0.12);
+    }
+    .hero-illustration span {
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    /* ===== SEARCH CARD ===== */
+    .search-card {
+      background: #f8fafc;
+      border-radius: 32px;
+      padding: 1.8rem 2rem;
+      margin-bottom: 2.8rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      border: 1px solid #eef2f6;
+    }
+
+    .search-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 1.2rem 1.8rem;
+    }
+
+    .search-item {
+      flex: 1 0 160px;
+      min-width: 140px;
+    }
+    .search-item label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+    .search-item .input-wrapper {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 60px;
+      padding: 0.2rem 0.2rem 0.2rem 1.2rem;
+      border: 1px solid #e2e8f0;
+      transition: 0.2s;
+    }
+    .search-item .input-wrapper:hover,
+    .search-item .input-wrapper:focus-within {
+      border-color: #d32f2f;
+      box-shadow: 0 0 0 3px rgba(211,47,47,0.08);
+    }
+    .search-item .input-wrapper i {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-right: 6px;
+    }
+    .search-item input,
+    .search-item select {
+      border: none;
+      background: transparent;
+      padding: 0.7rem 0.6rem 0.7rem 0;
+      font-size: 0.95rem;
+      width: 100%;
+      outline: none;
+      color: #0b1a2e;
+      font-weight: 500;
+    }
+    .search-item select {
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #d32f2f;
+      border: none;
+      padding: 0.8rem 2.2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: default;
+      box-shadow: 0 8px 18px rgba(211, 47, 47, 0.3);
+      transition: 0.15s;
+      letter-spacing: 0.3px;
+      border: 1px solid #d32f2f;
+      margin-top: 4px;
+    }
+    .btn-primary i {
+      font-size: 1rem;
+    }
+    .btn-primary:hover {
+      background: #b71c1c;
+      box-shadow: 0 10px 22px rgba(211,47,47,0.35);
+      transform: scale(1.02);
+    }
+
+    /* ===== ROUTES / POPULAR ===== */
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .section-title h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #0b1a2e;
+      letter-spacing: -0.3px;
+    }
+    .section-title h2 i {
+      color: #d32f2f;
+      margin-right: 6px;
+    }
+    .section-title a {
+      color: #d32f2f;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+    }
+    .section-title a:hover {
+      border-bottom-color: #d32f2f;
+    }
+
+    .route-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .route-card {
+      background: #fafcff;
+      border-radius: 24px;
+      padding: 1.2rem 1rem 1.2rem 1.5rem;
+      border: 1px solid #edf2f7;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+    }
+    .route-card:hover {
+      transform: translateY(-4px);
+      border-color: #d32f2f40;
+      box-shadow: 0 12px 24px -12px rgba(211,47,47,0.15);
+      background: white;
+    }
+    .route-icon {
+      background: #d32f2f0c;
+      width: 48px;
+      height: 48px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: #d32f2f;
+      flex-shrink: 0;
+    }
+    .route-info h4 {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #1e293b;
+    }
+    .route-info p {
+      color: #64748b;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 2px;
+    }
+    .route-info p i {
+      font-size: 0.7rem;
+      color: #94a3b8;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer-note {
+      margin-top: 3rem;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.9rem;
+      border-top: 1px solid #eef2f6;
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .footer-note span i {
+      color: #d32f2f;
+      margin: 0 4px;
+    }
+    .footer-note .trust {
+      display: flex;
+      gap: 1.2rem;
+    }
+    .footer-note .trust i {
+      color: #1e293b;
+      opacity: 0.6;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 700px) {
+      .app-container { padding: 1.5rem; }
+      .hero-text h1 { font-size: 2rem; }
+      .search-grid { flex-direction: column; }
+      .search-item { flex: 1 1 auto; width: 100%; }
+      .btn-primary { width: 100%; justify-content: center; }
+      .nav-actions { gap: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .brand-name { font-size: 1.5rem; }
+      .hero-illustration { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-container">
+
+  <!-- header -->
+  <header class="navbar">
+    <div class="brand">
+      <div class="brand-icon"><i class="fas fa-bus"></i></div>
+      <div class="brand-name">Red<span>Bus</span></div>
+    </div>
+    <div class="nav-actions">
+      <a href="#"><i class="fas fa-ticket-alt"></i> My trips</a>
+      <a href="#"><i class="fas fa-user-circle"></i> Sign in</a>
+      <span class="btn-outline"><i class="fas fa-plus-circle"></i> List your bus</span>
+    </div>
+  </header>
+
+  <!-- hero -->
+  <div class="hero">
+    <div class="hero-text">
+      <h1>
+        <i class="fas fa-map-pin"></i> 
+        Explore <span class="highlight">Andhra</span> &amp; <span class="highlight">Telangana</span>
+      </h1>
+      <p><i class="fas fa-check-circle" style="color:#d32f2f; margin-right: 6px;"></i> Book buses across Hyderabad, Vizag, Vijayawada &amp; more.</p>
+    </div>
+    <div class="hero-illustration">
+      <i class="fas fa-bus-alt"></i>
+      <span>+150 routes</span>
+    </div>
+  </div>
+
+  <!-- search card with Telugu/AP cities -->
+  <div class="search-card">
+    <div class="search-grid">
+      <div class="search-item">
+        <label><i class="fas fa-arrow-right" style="margin-right: 4px;"></i> From</label>
+        <div class="input-wrapper">
+          <i class="fas fa-map-marker-alt"></i>
+          <input type="text" placeholder="City or station" value="Hyderabad">
+        </div>
+      </div>
+      <div class="search-item">
+        <label><i class="fas fa-arrow-left" style="margin-right: 4px;"></i> To</label>
+        <div class="input-wrapper">
+          <i class="fas fa-map-marker-alt"></i>
+          <input type="text" placeholder="Destination" value="Visakhapatnam">
+        </div>
+      </div>
+      <div class="search-item">
+        <label><i class="far fa-calendar-alt"></i> Date</label>
+        <div class="input-wrapper">
+          <i class="fas fa-calendar-day"></i>
+          <input type="date" value="2026-08-10">
+        </div>
+      </div>
+      <div class="search-item">
+        <label><i class="fas fa-users"></i> Passengers</label>
+        <div class="input-wrapper">
+          <i class="fas fa-user"></i>
+          <select>
+            <option>1</option>
+            <option selected>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5+</option>
+          </select>
+        </div>
+      </div>
+      <div class="search-item" style="flex: 0 1 auto;">
+        <button class="btn-primary"><i class="fas fa-search"></i> Search buses</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- popular routes - Andhra Pradesh & Telangana -->
+  <div class="section-title">
+    <h2><i class="fas fa-route"></i> Popular routes in AP &amp; TG</h2>
+    <a href="#">View all <i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i></a>
+  </div>
+
+  <div class="route-grid">
+    <div class="route-card">
+      <div class="route-icon"><i class="fas fa-bus"></i></div>
+      <div class="route-info">
+        <h4>Hyderabad ? Vijayawada</h4>
+        <p><i class="fas fa-clock"></i> 5h 30m · 22 buses</p>
+      </div>
+    </div>
+    <div class="route-card">
+      <div class="route-icon"><i class="fas fa-bus"></i></div>
+      <div class="route-info">
+        <h4>Visakhapatnam ? Vizag</h4>
+        <p><i class="fas fa-clock"></i> 2h 15m · 18 buses</p>
+      </div>
+    </div>
+    <div class="route-card">
+      <div class="route-icon"><i class="fas fa-bus"></i></div>
+      <div class="route-info">
+        <h4>Warangal ? Hyderabad</h4>
+        <p><i class="fas fa-clock"></i> 3h 40m · 14 buses</p>
+      </div>
+    </div>
+    <div class="route-card">
+      <div class="route-icon"><i class="fas fa-bus"></i></div>
+      <div class="route-info">
+        <h4>Tirupati ? Chennai</h4>
+        <p><i class="fas fa-clock"></i> 3h 20m · 11 buses</p>
+      </div>
+    </div>
+    <div class="route-card">
+      <div class="route-icon"><i class="fas fa-bus"></i></div>
+      <div class="route-info">
+        <h4>Guntur ? Ongole</h4>
+        <p><i class="fas fa-clock"></i> 2h 50m · 9 buses</p>
+      </div>
+    </div>
+    <div class="route-card">
+      <div class="route-icon"><i class="fas fa-bus"></i></div>
+      <div class="route-info">
+        <h4>Karimnagar ? Hyderabad</h4>
+        <p><i class="fas fa-clock"></i> 4h 10m · 16 buses</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- extra local flavour: second row of routes -->
+  <div style="margin-top: 1.2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1.5rem;">
+    <div class="route-card">
+      <div class="route-icon"><i class="fas fa-bus"></i></div>
+      <div class="route-info">
+        <h4>Rajahmundry ? Kakinada</h4>
+        <p><i class="fas fa-clock"></i> 1h 45m · 7 buses</p>
+      </div>
+    </div>
+    <div class="route-card">
+      <div class="route-icon"><i class="fas fa-bus"></i></div>
+      <div class="route-info">
+        <h4>Nizamabad ? Hyderabad</h4>
+        <p><i class="fas fa-clock"></i> 3h 20m · 12 buses</p>
+      </div>
+    </div>
+    <div class="route-card">
+      <div class="route-icon"><i class="fas fa-bus"></i></div>
+      <div class="route-info">
+        <h4>Vijayawada ? Guntur</h4>
+        <p><i class="fas fa-clock"></i> 1h 10m · 20 buses</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div class="footer-note">
+    <div>
+      <i class="fas fa-shield-alt"></i> Safe &amp; secure booking 
+      <span style="margin:0 6px;">·</span> 
+      <i class="fas fa-headset"></i> 24/7 support
+    </div>
+    <div class="trust">
+      <span><i class="fas fa-bus"></i> 350+ operators</span>
+      <span><i class="fas fa-star" style="color:#fbbf24;"></i> 4.7/5 rating</span>
+      <span><i class="fas fa-credit-card"></i> No hidden fees</span>
+    </div>
+  </div>
+
+  <!-- clean brand line -->
+  <div style="margin-top: 1.2rem; text-align: right; font-size: 0.7rem; color: #cbd5e1; letter-spacing: 0.3px; border-top: 1px solid #f1f5f9; padding-top: 1rem;">
+    <i class="fas fa-check-circle" style="color: #d32f2f;"></i> RedBus · connecting Andhra &amp; Telangana
+  </div>
+
+</div>
+</body>
+</html>

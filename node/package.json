@@ -1,0 +1,25 @@
+{
+  "name": "goibibo-hotel-booking",
+  "version": "1.0.0",
+  "description": "Hotel booking platform - Goibibo clone",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "hotel",
+    "booking",
+    "goibibo",
+    "nodejs",
+    "express"
+  ],
+  "author": "Sandeep Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

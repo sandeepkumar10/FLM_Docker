@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goibibo · Hotel Booking</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #e8f0fe;
+      padding: 1.5rem;
+      min-height: 100vh;
+    }
+
+    .app-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 32px;
+      box-shadow: 0 20px 60px rgba(0, 50, 120, 0.10);
+      padding: 2rem 2.5rem 3rem;
+      border: 1px solid #d4e2f7;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #e8f0fe;
+      margin-bottom: 2rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-icon {
+      background: #1a5fb4;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      box-shadow: 0 6px 12px rgba(26, 95, 180, 0.25);
+    }
+
+    .brand-name {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #1a2a3a;
+    }
+    .brand-name span {
+      color: #1a5fb4;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+    }
+
+    .nav-actions a {
+      text-decoration: none;
+      color: #1a2a3a;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-actions a i {
+      color: #1a5fb4;
+    }
+    .nav-actions a:hover {
+      color: #1a5fb4;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #1a5fb4;
+      padding: 0.5rem 1.3rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #1a5fb4;
+      transition: 0.2s;
+      cursor: default;
+    }
+    .btn-outline i {
+      margin-right: 6px;
+    }
+    .btn-outline:hover {
+      background: #1a5fb4;
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #e8f0fe 0%, #d4e2f7 100%);
+      border-radius: 24px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .hero-text h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #0a1a2e;
+    }
+    .hero-text h1 i {
+      color: #1a5fb4;
+      margin-right: 8px;
+    }
+    .hero-text p {
+      color: #2a4a6a;
+      font-size: 1.1rem;
+      margin-top: 0.3rem;
+    }
+    .hero-badge {
+      background: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      color: #1a5fb4;
+      box-shadow: 0 4px 12px rgba(26, 95, 180, 0.15);
+    }
+
+    .search-card {
+      background: #f4f8ff;
+      border-radius: 24px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2.5rem;
+      border: 1px solid #d4e2f7;
+    }
+
+    .search-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 1rem 1.5rem;
+    }
+
+    .search-item {
+      flex: 1 0 150px;
+      min-width: 130px;
+    }
+    .search-item label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: #2a5a7a;
+      margin-bottom: 4px;
+    }
+    .search-item .input-wrapper {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 40px;
+      padding: 0.1rem 0.1rem 0.1rem 1rem;
+      border: 1.5px solid #c8daf0;
+      transition: 0.2s;
+    }
+    .search-item .input-wrapper:hover,
+    .search-item .input-wrapper:focus-within {
+      border-color: #1a5fb4;
+      box-shadow: 0 0 0 3px rgba(26, 95, 180, 0.08);
+    }
+    .search-item .input-wrapper i {
+      color: #4a7a9a;
+      font-size: 0.85rem;
+      margin-right: 6px;
+    }
+    .search-item input,
+    .search-item select {
+      border: none;
+      background: transparent;
+      padding: 0.7rem 0.5rem 0.7rem 0;
+      font-size: 0.9rem;
+      width: 100%;
+      outline: none;
+      color: #0a1a2e;
+      font-weight: 500;
+    }
+
+    .btn-primary {
+      background: #1a5fb4;
+      border: none;
+      padding: 0.8rem 2.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(26, 95, 180, 0.3);
+      transition: 0.15s;
+      border: 1px solid #1a5fb4;
+      margin-top: 4px;
+    }
+    .btn-primary:hover {
+      background: #0f4a8a;
+      box-shadow: 0 10px 22px rgba(26, 95, 180, 0.35);
+      transform: scale(1.02);
+    }
+    .btn-danger {
+      background: #dc3545;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-danger:hover {
+      background: #b02a37;
+      transform: scale(1.05);
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .section-title h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0a1a2e;
+    }
+    .section-title h2 i {
+      color: #1a5fb4;
+      margin-right: 6px;
+    }
+
+    .hotel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hotel-card {
+      background: #fafcff;
+      border-radius: 20px;
+      padding: 1.2rem 1.2rem 1.2rem 1.5rem;
+      border: 1px solid #dce8f5;
+      transition: 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .hotel-card:hover {
+      transform: translateY(-5px);
+      border-color: #1a5fb480;
+      box-shadow: 0 12px 28px -12px rgba(26, 95, 180, 0.2);
+      background: white;
+    }
+    .hotel-card .hotel-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .hotel-card .hotel-icon {
+      font-size: 1.8rem;
+      background: #e8f0fe;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a5fb4;
+    }
+    .hotel-card .hotel-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #0a1a2e;
+    }
+    .hotel-card .hotel-location {
+      color: #4a6a8a;
+      font-size: 0.85rem;
+    }
+    .hotel-card .hotel-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.2rem;
+    }
+    .hotel-card .hotel-price {
+      font-weight: 700;
+      color: #1a5fb4;
+      font-size: 1.1rem;
+    }
+    .hotel-card .hotel-rating {
+      background: #1a5fb4;
+      color: white;
+      padding: 0.15rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .hotel-card .book-btn {
+      background: #1a5fb4;
+      border: none;
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.85rem;
+      width: 100%;
+      margin-top: 0.3rem;
+    }
+    .hotel-card .book-btn:hover {
+      background: #0f4a8a;
+      transform: scale(1.02);
+    }
+
+    .bookings-section {
+      background: #f4f8ff;
+      border-radius: 24px;
+      padding: 1.5rem 2rem;
+      border: 1px solid #d4e2f7;
+      margin-top: 1.5rem;
+    }
+    .bookings-section h3 {
+      color: #0a1a2e;
+      margin-bottom: 1rem;
+    }
+    .bookings-section h3 i {
+      color: #1a5fb4;
+      margin-right: 8px;
+    }
+    .booking-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .booking-table th {
+      text-align: left;
+      padding: 0.6rem 0.4rem;
+      border-bottom: 2px solid #c8daf0;
+      color: #2a5a7a;
+      font-weight: 600;
+    }
+    .booking-table td {
+      padding: 0.6rem 0.4rem;
+      border-bottom: 1px solid #dce8f5;
+      color: #1a2a3a;
+    }
+    .booking-table .status-badge {
+      background: #28a745;
+      color: white;
+      padding: 0.15rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .empty-state {
+      color: #6a8aaa;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #1a5fb4;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      display: none;
+      font-weight: 500;
+      z-index: 999;
+    }
+    .toast.show {
+      display: block;
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 700px) {
+      .app-container { padding: 1rem; }
+      .hero-text h1 { font-size: 1.6rem; }
+      .search-grid { flex-direction: column; }
+      .search-item { flex: 1 1 auto; width: 100%; }
+      .btn-primary { width: 100%; justify-content: center; }
+      .hotel-grid { grid-template-columns: 1fr; }
+      .booking-table { font-size: 0.75rem; }
+      .booking-table th, .booking-table td { padding: 0.3rem 0.2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-container" id="app">
+  <header class="navbar">
+    <div class="brand">
+      <div class="brand-icon"><i class="fas fa-hotel"></i></div>
+      <div class="brand-name">Goi<span>bibo</span></div>
+    </div>
+    <div class="nav-actions">
+      <a href="#" onclick="fetchBookings()"><i class="fas fa-ticket-alt"></i> My bookings</a>
+      <a href="#"><i class="fas fa-user-circle"></i> Sign in</a>
+      <span class="btn-outline"><i class="fas fa-plus-circle"></i> List your hotel</span>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-text">
+      <h1><i class="fas fa-map-pin"></i> Find your stay</h1>
+      <p>Book hotels across India at best prices</p>
+    </div>
+    <div class="hero-badge">
+      <i class="fas fa-star" style="color: #fbbf24;"></i> 4.7/5 · 50k+ bookings
+    </div>
+  </div>
+
+  <div class="search-card">
+    <div class="search-grid">
+      <div class="search-item">
+        <label><i class="fas fa-map-marker-alt"></i> Destination</label>
+        <div class="input-wrapper">
+          <i class="fas fa-city"></i>
+          <input type="text" id="searchLocation" placeholder="City" value="Mumbai">
+        </div>
+      </div>
+      <div class="search-item">
+        <label><i class="fas fa-calendar-alt"></i> Check-in</label>
+        <div class="input-wrapper">
+          <i class="fas fa-calendar-day"></i>
+          <input type="date" id="searchCheckIn" value="2026-08-15">
+        </div>
+      </div>
+      <div class="search-item">
+        <label><i class="fas fa-calendar-alt"></i> Check-out</label>
+        <div class="input-wrapper">
+          <i class="fas fa-calendar-day"></i>
+          <input type="date" id="searchCheckOut" value="2026-08-17">
+        </div>
+      </div>
+      <div class="search-item">
+        <label><i class="fas fa-users"></i> Guests</label>
+        <div class="input-wrapper">
+          <i class="fas fa-user"></i>
+          <select id="searchGuests">
+            <option>1</option>
+            <option selected>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </div>
+      </div>
+      <div class="search-item" style="flex: 0 1 auto;">
+        <button class="btn-primary" onclick="searchHotels()"><i class="fas fa-search"></i> Search</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <h2><i class="fas fa-building"></i> Available hotels</h2>
+    <span style="color: #4a6a8a; font-size: 0.9rem;" id="hotelCount">8 properties</span>
+  </div>
+  <div class="hotel-grid" id="hotelGrid"></div>
+
+  <div class="bookings-section">
+    <h3><i class="fas fa-ticket-alt"></i> Your bookings</h3>
+    <div id="bookingsList">
+      <div class="empty-state">No bookings yet. Book a hotel above!</div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+  const API_BASE = window.location.origin;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadHotels();
+    fetchBookings();
+  });
+
+  async function loadHotels() {
+    try {
+      const response = await fetch('/api/hotels');
+      const hotels = await response.json();
+      renderHotels(hotels);
+      document.getElementById('hotelCount').textContent = hotels.length + ' properties';
+    } catch (error) {
+      console.error('Error loading hotels:', error);
+    }
+  }
+
+  async function searchHotels() {
+    const location = document.getElementById('searchLocation').value.trim().toLowerCase();
+    try {
+      const response = await fetch('/api/hotels');
+      const hotels = await response.json();
+      const filtered = location ? hotels.filter(h => h.location.toLowerCase().includes(location)) : hotels;
+      renderHotels(filtered);
+      document.getElementById('hotelCount').textContent = filtered.length + ' properties';
+      showToast(`Showing ${filtered.length} hotels in ${location || 'all cities'}`);
+    } catch (error) {
+      console.error('Error searching hotels:', error);
+    }
+  }
+
+  function renderHotels(hotels) {
+    const grid = document.getElementById('hotelGrid');
+    if (hotels.length === 0) {
+      grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 2rem; color: #6a8aaa;">No hotels found. Try a different location.</div>`;
+      return;
+    }
+    grid.innerHTML = hotels.map(hotel => `
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-icon"><i class="fas ${hotel.icon || 'fa-hotel'}"></i></div>
+          <div>
+            <div class="hotel-name">${hotel.name}</div>
+            <div class="hotel-location"><i class="fas fa-map-marker-alt" style="font-size:0.7rem;"></i> ${hotel.location}</div>
+          </div>
+        </div>
+        <div class="hotel-details">
+          <span class="hotel-price">?${hotel.price}/night</span>
+          <span class="hotel-rating"><i class="fas fa-star" style="font-size:0.7rem;"></i> ${hotel.rating}</span>
+        </div>
+        <button class="book-btn" onclick="openBooking(${hotel.id}, '${hotel.name}', ${hotel.price})">
+          <i class="fas fa-calendar-check"></i> Book now
+        </button>
+      </div>
+    `).join('');
+  }
+
+  function openBooking(hotelId, hotelName, pricePerNight) {
+    const guestName = prompt('Enter guest name:');
+    if (!guestName) return;
+    
+    const checkIn = document.getElementById('searchCheckIn').value;
+    const checkOut = document.getElementById('searchCheckOut').value;
+    const rooms = parseInt(document.getElementById('searchGuests').value) || 1;
+    
+    if (!checkIn || !checkOut) {
+      showToast('Please select check-in and check-out dates');
+      return;
+    }
+    
+    const nights = Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24));
+    if (nights <= 0) {
+      showToast('Check-out must be after check-in');
+      return;
+    }
+    
+    const totalPrice = pricePerNight * nights * rooms;
+    
+    const bookingData = {
+      hotelId,
+      hotelName,
+      guestName,
+      checkIn,
+      checkOut,
+      rooms,
+      totalPrice
+    };
+    
+    fetch('/api/bookings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(bookingData)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.error) {
+        showToast('Error: ' + data.error);
+      } else {
+        showToast(`Booking confirmed for ${guestName} at ${hotelName}`);
+        fetchBookings();
+      }
+    })
+    .catch(err => {
+      showToast('Booking failed. Please try again.');
+      console.error(err);
+    });
+  }
+
+  async function fetchBookings() {
+    try {
+      const response = await fetch('/api/bookings');
+      const bookings = await response.json();
+      const container = document.getElementById('bookingsList');
+      
+      if (bookings.length === 0) {
+        container.innerHTML = '<div class="empty-state">No bookings yet. Book a hotel above!</div>';
+        return;
+      }
+      
+      container.innerHTML = `
+        <table class="booking-table">
+          <thead>
+            <tr>
+              <th>Hotel</th>
+              <th>Guest</th>
+              <th>Check-in</th>
+              <th>Check-out</th>
+              <th>Rooms</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${bookings.map(b => `
+              <tr>
+                <td><strong>${b.hotelName}</strong></td>
+                <td>${b.guestName}</td>
+                <td>${b.checkIn}</td>
+                <td>${b.checkOut}</td>
+                <td>${b.rooms}</td>
+                <td>?${b.totalPrice}</td>
+                <td><span class="status-badge">${b.status}</span></td>
+                <td><button class="btn-danger" onclick="cancelBooking(${b.id})"><i class="fas fa-times"></i> Cancel</button></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+    }
+  }
+
+  async function cancelBooking(id) {
+    if (!confirm('Are you sure you want to cancel this booking?')) return;
+    
+    try {
+      const response = await fetch(`/api/bookings/${id}`, { method: 'DELETE' });
+      const data = await response.json();
+      if (data.message) {
+        showToast('Booking cancelled successfully');
+        fetchBookings();
+      } else {
+        showToast('Failed to cancel booking');
+      }
+    } catch (error) {
+      showToast('Error cancelling booking');
+      console.error(error);
+    }
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+</script>
+</body>
+</html>
